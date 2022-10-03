@@ -1,0 +1,21 @@
+version: '2'
+services:
+  web:
+    build: .
+    command: npm run start:dev
+    environment: 
+      NODE_ENV: development
+    volumes:
+      - ./src:/usr/app/src
+      - ./test:/usr/app/test
+    ports:
+      - "3515:3515"
+  postgres:
+    image: postgres
+    environment:
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_USER: hinge_dev
+      POSTGRES_PASSWORD: hinge_password
+      POSTGRES_DB: trees
+    volumes:
+      - ./tmp/pgdata:/var/lib/postgresql/data
